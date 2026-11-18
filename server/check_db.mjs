@@ -1,0 +1,11 @@
+﻿import { getDb, initDb } from './src/db/database.js';
+await initDb();
+const db = getDb();
+const tables = db.prepare("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").all();
+console.log('TABLES:', JSON.stringify(tables));
+const invCount = db.prepare("SELECT COUNT(*) as cnt FROM inventory").get();
+console.log('INVENTORY COUNT:', JSON.stringify(invCount));
+const mkCount = db.prepare("SELECT COUNT(*) as cnt FROM market_knowledge").get();
+console.log('MARKET_KNOWLEDGE COUNT:', JSON.stringify(mkCount));
+const prodCount = db.prepare("SELECT COUNT(*) as cnt FROM products").get();
+console.log('PRODUCTS COUNT:', JSON.stringify(prodCount));
